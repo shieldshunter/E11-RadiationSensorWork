@@ -1,0 +1,30 @@
+pi@raspberrypi:~ $ python3
+Python 3.5.3 (default, Sep 27 2018, 17:25:39) 
+[GCC 6.3.0 20170516] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import serial
+>>> port serial.Serial('/dev/serial0')
+  File "<stdin>", line 1
+    port serial.Serial('/dev/serial0')
+              ^
+SyntaxError: invalid syntax
+>>> port=serial.Serial('/dev/serial0')
+>>> port.read(32)
+b'B\x00M\x00\x1c\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01_\x00\x83\x00,\x00\x00\x00\x00\x00\x00\x00\x00\x01'
+>>> data = port.read(32)
+>>> data[4:6]
+b'\x1c\x00'
+>>> int.from_bytes(data[4:6},byteorder='big')
+  File "<stdin>", line 1
+    int.from_bytes(data[4:6},byteorder='big')
+                           ^
+SyntaxError: invalid syntax
+>>> int.from_bytes(data[4:6],byteorder='big')
+7168
+>>> int.from_bytes(data[5:7],byteorder='big')
+0
+>>> int.from_bytes(data[6:8],byteorder='big')
+0
+>>> int.from_bytes(data[7:9],byteorder='big')
+0
+>>> 
